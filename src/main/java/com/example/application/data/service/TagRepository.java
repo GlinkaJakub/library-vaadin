@@ -1,11 +1,12 @@
 package com.example.application.data.service;
 
-import com.example.application.data.entity.User;
+import com.example.application.data.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface TagRepository extends JpaRepository<Tag, Integer> {
 
-    User findByUsername(String username);
+    Tag findByName(String name);
+
 }

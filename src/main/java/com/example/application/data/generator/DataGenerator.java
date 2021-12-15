@@ -1,7 +1,11 @@
 package com.example.application.data.generator;
 
 import com.example.application.data.Role;
+import com.example.application.data.entity.Book;
+import com.example.application.data.entity.Tag;
 import com.example.application.data.entity.User;
+import com.example.application.data.service.BookRepository;
+import com.example.application.data.service.TagRepository;
 import com.example.application.data.service.UserRepository;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import java.util.Collections;
@@ -17,7 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class DataGenerator {
 
     @Bean
-    public CommandLineRunner loadData(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public CommandLineRunner loadData(PasswordEncoder passwordEncoder, UserRepository userRepository,
+                                      BookRepository bookRepository, TagRepository tagRepository) {
         return args -> {
             Logger logger = LoggerFactory.getLogger(getClass());
             if (userRepository.count() != 0L) {
@@ -45,6 +50,21 @@ public class DataGenerator {
                     "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80");
             admin.setRoles(Stream.of(Role.USER, Role.ADMIN).collect(Collectors.toSet()));
             userRepository.save(admin);
+            logger.info("... generating 2 Book entities...");
+            Tag tag1 = new Tag();
+            tag1.setName("tag1");
+            Tag tag2 = new Tag();
+            tag2.setName("tag2");
+            tagRepository.save(tag1);
+            tagRepository.save(tag2);
+            Book book1 = new Book();
+            book1.setTitle("Jakis tytul");
+            book1.setAuthor("Jakis author");
+            Book book2 = new Book();
+            book2.setTitle("Inny tytul");
+            book2.setAuthor("Inny author");
+            bookRepository.save(book1);
+            bookRepository.save(book2);
 
             logger.info("Generated demo data");
         };
