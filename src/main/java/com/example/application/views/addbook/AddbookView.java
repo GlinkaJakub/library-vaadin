@@ -26,6 +26,7 @@ public class AddbookView extends HorizontalLayout {
     private BookService bookService;
 
     private TextField name;
+    private TextField author;
     private Text books;
     private Text booksCount;
     private Button sayHello;
@@ -33,23 +34,30 @@ public class AddbookView extends HorizontalLayout {
     public AddbookView(BookService bookService) {
         this.bookService = bookService;
         String booksTitle = "";
-        List<Book> bookList = bookService.list(PageRequest.of(0, 2)).toList();
-        for (Book b : bookList ) {
+        List<Book> bookList = bookService.list(PageRequest.of(0, 10)).toList();
+        for (Book b : bookList) {
             booksTitle += b.getTitle() + " - " + b.getAuthor() + "\n";
         }
         books = new Text(booksTitle);
         booksCount = new Text(String.valueOf(bookService.count()));
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
+        name = new TextField("Title");
+        author = new TextField("Author");
+        sayHello = new Button("Save");
         sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
+            Book book = new Book();
+            book.setTitle(name.getValue());
+            book.setAuthor(author.getValue());
+//            Notification.show("Hello " + name.getValue());
+            bookService.save(book);
+            name.setLabel("");
+            author.setLabel("");
         });
 
         setMargin(true);
         add(books, booksCount);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+        setVerticalComponentAlignment(Alignment.END, name, author, sayHello);
 
-        add(name, sayHello);
+        add(name, author, sayHello);
     }
 
 }

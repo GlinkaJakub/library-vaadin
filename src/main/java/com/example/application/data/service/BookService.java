@@ -1,6 +1,7 @@
 package com.example.application.data.service;
 
 import com.example.application.data.entity.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.util.Optional;
 @Service
 public class BookService {
 
+    @Autowired
     private BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
@@ -34,5 +36,9 @@ public class BookService {
 
     public int count() {
         return (int) bookRepository.count();
+    }
+
+    public Book save(Book book) {
+        return bookRepository.save(book);
     }
 }

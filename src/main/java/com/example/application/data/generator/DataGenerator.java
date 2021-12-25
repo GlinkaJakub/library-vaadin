@@ -65,6 +65,10 @@ public class DataGenerator {
             book2.setAuthor("Inny author");
             bookRepository.save(book1);
             bookRepository.save(book2);
+            Book book3 = new Book();
+            book3.setTitle("Biografia Łucji Konarzewskiej");
+            book3.setAuthor("Zuzanna Glinka");
+            bookRepository.save(book3);
 
             logger.info("Generated demo data");
         };
