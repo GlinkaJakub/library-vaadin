@@ -3,11 +3,10 @@ package com.example.application.data.entity;
 import com.example.application.data.AbstractEntity;
 import com.example.application.data.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
 import java.util.Set;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
 public class User extends AbstractEntity {
@@ -20,6 +19,8 @@ public class User extends AbstractEntity {
     private Set<Role> roles;
     @Lob
     private String profilePictureUrl;
+    @OneToMany
+    private List<Book> borrowedBooks;
 
     public String getUsername() {
         return username;

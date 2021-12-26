@@ -4,17 +4,20 @@ import com.example.application.data.entity.Book;
 import com.example.application.data.service.BookService;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.charts.model.Title;
+import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.security.PermitAll;
+import java.util.Arrays;
 import java.util.List;
 
 @PageTitle("Add book")
@@ -30,6 +33,7 @@ public class AddbookView extends HorizontalLayout {
     private Text books;
     private Text booksCount;
     private Button sayHello;
+    private Crud<Book> table;
 
     public AddbookView(BookService bookService) {
         this.bookService = bookService;
@@ -47,10 +51,10 @@ public class AddbookView extends HorizontalLayout {
             Book book = new Book();
             book.setTitle(name.getValue());
             book.setAuthor(author.getValue());
-//            Notification.show("Hello " + name.getValue());
             bookService.save(book);
-            name.setLabel("");
-            author.setLabel("");
+            Notification.show("Added book: " + name.getValue());
+            name.setValue("");
+            author.setValue("");
         });
 
         setMargin(true);

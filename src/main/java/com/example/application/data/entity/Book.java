@@ -2,11 +2,7 @@ package com.example.application.data.entity;
 
 import com.example.application.data.AbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -22,6 +18,9 @@ public class Book extends AbstractEntity {
         joinColumns = @JoinColumn(name = "book_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
+
+    @ManyToOne
+    private User borrower;
 
     public String getTitle() {return title;}
     public void setTitle(String title) {this.title = title;}
