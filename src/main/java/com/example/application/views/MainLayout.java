@@ -2,7 +2,8 @@ package com.example.application.views;
 
 import com.example.application.data.entity.User;
 import com.example.application.security.AuthenticatedUser;
-import com.example.application.views.addbook.AddbookView;
+import com.example.application.views.book.AddTagToBookView;
+import com.example.application.views.book.AddbookView;
 import com.example.application.views.library.LibraryView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -120,6 +121,8 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Library", "la la-th", LibraryView.class), //
 
                 new MenuItemInfo("Add book", "la la-globe", AddbookView.class), //
+
+                new MenuItemInfo("Add tag to book", "la la-globe", AddTagToBookView.class), //
 
         };
         List<RouterLink> links = new ArrayList<>();

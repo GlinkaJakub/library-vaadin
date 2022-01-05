@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,8 +29,8 @@ public class TagService {
         tagRepository.deleteById(id);
     }
 
-    public Page<Tag> list(Pageable pageable) {
-        return tagRepository.findAll(pageable);
+    public List<Tag> list() {
+        return tagRepository.findAll();
     }
 
     public int count() {
